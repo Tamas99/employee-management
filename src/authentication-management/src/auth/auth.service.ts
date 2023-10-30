@@ -17,10 +17,10 @@ export class AuthService {
     this.EMPLOYEES_URL = process.env.EMPLOYEES_URL;
   }
 
-  async validateUser(personalId: string, password: string) {
+  async validateUser(email: string, password: string) {
     const { data } = await firstValueFrom(
       this.httpService
-        .get<UserCredentials>(this.EMPLOYEES_URL + '/employees/' + personalId)
+        .get<UserCredentials>(this.EMPLOYEES_URL + '/employees/' + email)
         .pipe(
           catchError((error: AxiosError) => {
             throw 'An error happened! ' + error;
@@ -41,7 +41,7 @@ export class AuthService {
   }
 
   async login(user: any) {
-    const payload = { sub: user.personalId };
+    const payload = { email: user.email };
     return {
       access_token: await this.jwtService.signAsync(payload),
     };
