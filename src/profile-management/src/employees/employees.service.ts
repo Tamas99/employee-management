@@ -25,8 +25,8 @@ export class EmployeesService {
     return this.employeesRepository.findOne({ _id: id });
   }
 
-  async getEmployeeByPersonalId(personalId: string): Promise<Employee> {
-    return this.employeesRepository.findOne({ personalId: personalId });
+  async getEmployeeByEmail(email: string): Promise<Employee> {
+    return this.employeesRepository.findOne({ email: email });
   }
 
   async updateEmployee(
